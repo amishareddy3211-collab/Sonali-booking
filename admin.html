@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - Riya Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',sans-serif;background:#0f0f0f;color:#fff;min-height:100vh;padding:20px}
+.box{max-width:500px;margin:0 auto;background:#1a1a1a;border-radius:24px;padding:26px;border:1px solid #333}
+h1{letter-spacing:3px;font-size:22px;text-align:center}h1 span{color:#D9FF66}
+.label{font-size:10px;font-weight:800;color:#888;letter-spacing:1.5px;margin:18px 0 8px;display:block;text-transform:uppercase}
+.input{width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid #333;background:#111;color:#fff;font-size:14px;outline:none}
+.input:focus{border-color:#D9FF66}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{width:100%;padding:16px;background:#D9FF66;color:#111;border:none;border-radius:12px;font-weight:800;font-size:14px;margin-top:20px;cursor:pointer}
+.small{font-size:11px;color:#666;text-align:center;margin-top:14px;line-height:1.5}
+.ok{background:#111;border:1px solid #2a2a2a;padding:12px;border-radius:12px;text-align:center;color:#D9FF66;font-weight:700;margin-top:12px;display:none}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>ADMIN <span>PANEL</span></h1>
+<p style="text-align:center;font-size:11px;color:#666;margin-top:6px;letter-spacing:1px">RIYA SPA - CONFIGURATION</p>
+
+<span class="label">UPI ID</span>
+<input id="upi" class="input" placeholder="sonali-5411@ptyes">
+
+<span class="label">Telegram ID - Manager Name</span>
+<input id="tgUser" class="input" placeholder="Sonal_0101">
+<span class="label">Display Name for Button</span>
+<input id="tgName" class="input" placeholder="SONALI SHARMA">
+
+<span class="label">Bot Token - @Sonali2_bot</span>
+<input id="botToken" class="input" placeholder="8791716212:AAG...">
+
+<span class="label">Chat ID</span>
+<input id="chatId" class="input" placeholder="8997697799">
+
+<span class="label">PRICE SETTINGS - Per Person Base Price</span>
+<div class="grid">
+<div><span class="label">1 Hour Price</span><input id="p1" class="input" type="number" placeholder="2000"></div>
+<div><span class="label">2 Hours Price</span><input id="p2" class="input" type="number" placeholder="3000"></div>
+<div><span class="label">3 Hours Price</span><input id="p3" class="input" type="number" placeholder="4000"></div>
+<div><span class="label">Full Night Price</span><input id="p4" class="input" type="number" placeholder="6000"></div>
+<div><span class="label">Full Day Price</span><input id="p5" class="input" type="number" placeholder="6000"></div>
+<div><span class="label">Advance Per Adult</span><input id="adv" class="input" type="number" placeholder="300"></div>
+</div>
+
+<button class="btn" onclick="save()">SAVE CONFIGURATION</button>
+<div class="ok" id="ok">✅ Configuration Saved! Now open your main website - It will auto update.</div>
+
+<div class="small">
+Default Values Already Filled.<br>
+After Save, Go To: <b style="color:#fff">index.html</b> — It will read from admin automatically.<br>
+If you clear browser data, re-enter here.
+</div>
+
+<a href="index.html" style="display:block;text-align:center;margin-top:16px;color:#D9FF66;text-decoration:none;font-weight:700;font-size:12px">→ GO TO WEBSITE</a>
+</div>
+
+<script>
+const defaults={
+ upi:'sonali-5411@ptyes',
+ tgUser:'Sonal_0101',
+ tgName:'SONALI SHARMA',
+ botToken:'8791716212:AAG8Rwj1OOg_rmWljehqWfFM5S0SEB5ogMI',
+ chatId:'8997697799',
+ p1:2000,p2:3000,p3:4000,p4:6000,p5:6000,adv:300
+};
+function load(){
+ let c=JSON.parse(localStorage.getItem('spa_config')||'null')||defaults;
+ document.getElementById('upi').value=c.upi;
+ document.getElementById('tgUser').value=c.tgUser;
+ document.getElementById('tgName').value=c.tgName;
+ document.getElementById('botToken').value=c.botToken;
+ document.getElementById('chatId').value=c.chatId;
+ document.getElementById('p1').value=c.p1;
+ document.getElementById('p2').value=c.p2;
+ document.getElementById('p3').value=c.p3;
+ document.getElementById('p4').value=c.p4;
+ document.getElementById('p5').value=c.p5;
+ document.getElementById('adv').value=c.adv;
+}
+function save(){
+ let c={
+  upi:document.getElementById('upi').value.trim()||defaults.upi,
+  tgUser:document.getElementById('tgUser').value.trim()||defaults.tgUser,
+  tgName:document.getElementById('tgName').value.trim()||defaults.tgName,
+  botToken:document.getElementById('botToken').value.trim()||defaults.botToken,
+  chatId:document.getElementById('chatId').value.trim()||defaults.chatId,
+  p1:parseInt(document.getElementById('p1').value)||defaults.p1,
+  p2:parseInt(document.getElementById('p2').value)||defaults.p2,
+  p3:parseInt(document.getElementById('p3').value)||defaults.p3,
+  p4:parseInt(document.getElementById('p4').value)||defaults.p4,
+  p5:parseInt(document.getElementById('p5').value)||defaults.p5,
+  adv:parseInt(document.getElementById('adv').value)||defaults.adv
+ };
+ localStorage.setItem('spa_config',JSON.stringify(c));
+ document.getElementById('ok').style.display='block';
+ setTimeout(()=>document.getElementById('ok').style.display='none',3000);
+}
+load();
+</script>
+</body>
+</html>
