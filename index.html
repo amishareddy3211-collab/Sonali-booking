@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riya Spa - Premium Booking</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:'Inter',sans-serif;background:linear-gradient(135deg,#fdf6f0,#f5f0ff);min-height:100vh;padding:15px}
+.main{max-width:450px;margin:auto;background:#fff;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.12);overflow:hidden;border:1px solid #eee}
+.header{background:#111;color:#fff;padding:22px;text-align:center}.header h1{margin:0;letter-spacing:5px;font-size:24px;font-weight:800}.header p{margin:6px 0 0;font-size:10px;letter-spacing:2px;color:#D9FF66}
+.progress{display:flex;align-items:center;padding:16px 20px;background:#fafafa;border-bottom:1px solid #eee}
+.dot{width:30px;height:30px;border-radius:50%;background:#eee;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#888}
+.dot.active{background:#111;color:#fff}.dot.done{background:#111;color:#fff}.line{flex:1;height:2px;background:#eee;margin:0 5px}.line.done{background:#111}
+.content{padding:22px}.label{font-size:11px;font-weight:800;color:#999;letter-spacing:1px;margin:14px 0 6px;display:block}
+.input{width:100%;padding:15px 16px;border-radius:14px;border:1.5px solid #e8e8e8;background:#fafafa;font-size:14px;outline:none}
+.btn{width:100%;padding:16px;background:#111;color:#fff;border:none;border-radius:14px;font-weight:800;font-size:14px;margin-top:16px;cursor:pointer}
+.back{width:100%;background:none;border:none;color:#888;padding:12px;font-weight:600}
+.type-box{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.type-card{border:1.5px solid #eee;border-radius:16px;padding:14px;text-align:center;cursor:pointer;background:#fff}.type-card.sel{border-color:#111;background:#111;color:#fff}
+.adult-box{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+.plan-card{border:1.5px solid #eee;border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;margin:10px 0;cursor:pointer;background:#fff}.plan-card.sel{border-color:#111;background:#111;color:#fff}
+.plan-card .t{font-weight:800;font-size:14px}.plan-card .s{font-size:11px;color:#888;margin-top:2px}.plan-card.sel .s{color:#bbb}.price{font-weight:800;font-size:18px}
+.pay-box{border:2px solid #111;border-radius:20px;overflow:hidden}.pay-head{background:#111;color:#fff;padding:12px;text-align:center;font-weight:800;font-size:12px}.pay-head b{color:#D9FF66}
+.qr-area{padding:20px;text-align:center}.upi-row{display:flex;justify-content:space-between;align-items:center;background:#f5f5f3;border:1px solid #eee;padding:10px 10px 10px 16px;border-radius:12px;margin-top:12px}
+.copy{background:#111;color:#fff;border:none;padding:8px 16px;border-radius:10px;font-weight:700;cursor:pointer}
+.bill{background:#fcfcfa;border-top:1px solid #eee;padding:14px 18px}.row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;color:#555}.row.total{font-weight:800;color:#111;border-top:1px dashed #ddd;padding-top:10px;margin-top:6px;font-size:14px}.row.rem{background:#111;color:#fff;border-radius:12px;padding:12px;margin-top:10px;font-weight:700}.row.rem span:last-child{color:#D9FF66;font-size:18px}
+.gate{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}.gate a{border:1.5px solid #111;border-radius:12px;padding:12px;text-align:center;text-decoration:none;color:#111;font-weight:800;font-size:11px;background:#fff}
+.s{display:none}.s.show{display:block}.success{background:#111;border-radius:22px;padding:24px;text-align:center;color:#fff;margin-top:10px}.success .name{color:#D9FF66;font-weight:800;margin-top:10px;font-size:16px}.tele-btn{display:block;margin-top:18px;background:#D9FF66;color:#111;text-decoration:none;padding:14px;border-radius:12px;font-weight:800}
+</style>
+</head>
+<body>
+<div class="main">
+<div class="header"><h1>RIYA SPA</h1><p>PREMIUM • PROFESSIONAL • PRIVATE</p></div>
+<div class="progress"><div class="dot active" id="d1">1</div><div class="line" id="l1"></div><div class="dot" id="d2">2</div><div class="line" id="l2"></div><div class="dot" id="d3">3</div><div class="line" id="l3"></div><div class="dot" id="d4">4</div></div>
+<div class="content">
+<div class="s show" id="s1">
+<span class="label">STEP 1 / YOUR DETAILS</span>
+<span class="label">Full Name</span><input id="fName" class="input" placeholder="Enter your full name" autocomplete="off">
+<span class="label">WhatsApp Number</span><input id="fPhone" class="input" placeholder="Enter WhatsApp number" autocomplete="off">
+<span class="label">Area / Location</span><input id="fArea" class="input" placeholder="Ex: Udaipur, Sukhadia Circle" autocomplete="off">
+<button class="btn" onclick="go1()">Continue → Booking Type</button>
+</div>
+<div class="s" id="s2">
+<span class="label">STEP 2 / BOOKING TYPE</span>
+<div class="type-box">
+<div id="inCall" class="type-card sel" onclick="setType('In Call')"><div>🏢</div><div style="font-weight:700;font-size:13px">IN CALL</div><div style="font-size:10px">Visit Our Spa</div></div>
+<div id="outCall" class="type-card" onclick="setType('Out Call')"><div>🚗</div><div style="font-weight:700;font-size:13px">OUT CALL</div><div style="font-size:10px">Hotel / Home</div></div>
+</div>
+<span class="label">HOW MANY ADULTS? - PRICE AUTO DOUBLE</span>
+<div class="adult-box">
+<div id="a1" class="type-card sel" onclick="setAdult(1)"><div style="font-weight:700">👤 1 Adult</div><div style="font-size:10px">100% Price</div></div>
+<div id="a2" class="type-card" onclick="setAdult(2)"><div style="font-weight:700">👥 2 Adult</div><div style="font-size:10px">2x Price</div></div>
+<div id="a3" class="type-card" onclick="setAdult(3)"><div style="font-weight:700">👥 3 Adult</div><div style="font-size:10px">3x Price</div></div>
+</div>
+<span class="label">SELECT DURATION</span>
+<div id="pl1" class="plan-card sel" onclick="setPlan(this,2000,'1 Hour')"><div><div class="t">1 HOUR</div><div class="s">Full Body Relax</div></div><div class="price" id="p1">₹2000</div></div>
+<div id="pl2" class="plan-card" onclick="setPlan(this,3000,'2 Hours')"><div><div class="t">2 HOURS</div><div class="s">Deep Tissue</div></div><div class="price" id="p2">₹3000</div></div>
+<div id="pl3" class="plan-card" onclick="setPlan(this,4000,'3 Hours')"><div><div class="t">3 HOURS</div><div class="s">VIP Full Service</div></div><div class="price" id="p3">₹4000</div></div>
+<div id="pl4" class="plan-card" onclick="setPlan(this,6000,'Full Night')"><div><div class="t">FULL NIGHT</div><div class="s">8 Hours Premium</div></div><div class="price" id="p4">₹6000</div></div>
+<div id="pl5" class="plan-card" onclick="setPlan(this,6000,'Full Day')"><div><div class="t">FULL DAY</div><div class="s">12 Hours Premium</div></div><div class="price" id="p5">₹6000</div></div>
+<button class="btn" onclick="go2()">Continue → Payment</button><button class="back" onclick="show(1)">← Back</button>
+</div>
+<div class="s" id="s3">
+<span class="label">STEP 3 / PAYMENT - UPI & QR</span>
+<div class="pay-box"><div class="pay-head">🔒 PAY <b>₹300 ADVANCE</b> - REST PAY AT SPA</div>
+<div class="qr-area"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=sonali-5411@ptyes&pn=Riya%20Spa&am=300&cu=INR" width="190" style="border-radius:14px;border:1px solid #eee"><div style="font-weight:800;font-size:28px;margin-top:12px">₹300 <span style="font-size:11px;color:#666">ADVANCE</span></div><div class="upi-row"><b>sonali-5411@ptyes</b><button class="copy" onclick="navigator.clipboard.writeText('sonali-5411@ptyes');alert('Copied sonali-5411@ptyes')">COPY</button></div></div>
+<div class="bill" id="billBox"></div></div>
+<div class="gate"><a href="tez://upi/pay?pa=sonali-5411@ptyes&pn=Riya%20Spa&am=300&cu=INR">Google Pay</a><a href="phonepe://pay?pa=sonali-5411@ptyes&pn=Riya%20Spa&am=300&cu=INR">PhonePe</a><a href="paytmmp://pay?pa=sonali-5411@ptyes&pn=Riya%20Spa&am=300&cu=INR">Paytm</a></div>
+<button class="btn" onclick="go3()">I Paid ₹300 → Upload Proof</button><button class="back" onclick="show(2)">← Back</button>
+</div>
+<div class="s" id="s4">
+<span class="label">STEP 4 / PAYMENT PROOF</span><p style="font-size:13px;color:#666">Upload screenshot of ₹300 payment</p><input type="file" id="fShot" class="input"><button class="btn" id="btnBook" onclick="doBook()">✅ Confirm Booking</button><button class="back" onclick="show(3)">← Back</button><p id="stat" style="text-align:center;font-weight:700;margin-top:12px"></p><div id="okBox" class="success" style="display:none"><div style="font-size:44px">✅</div><h2>TEMPORARY BOOKING CONFIRMED</h2><div class="name" id="hiName"></div><div style="background:#1c1c1c;border-radius:14px;padding:14px;margin-top:14px"><div style="font-size:11px;color:#D9FF66;letter-spacing:2px;font-weight:800">AGENCY MESSAGE</div><div style="font-size:14px;margin-top:6px">Our Agency Will Send You Complete Details Within 15 Minutes ✨</div></div><a href="https://telegram.me/Sonal_0101" target="_blank" class="tele-btn">📩 CONTACT NOW - @Sonal_0101</a><p style="font-size:10px;color:#777;margin-top:10px">UPI: sonali-5411@ptyes | Bot: @Sonali2_bot | ID: 8997697799</p></div></div>
+</div>
+</div>
+<script>
+let adults=1, base=2000, total=2000, dur='1 Hour', bType='In Call';
+const UPI='sonali-5411@ptyes';
+const BOT_TOKEN='8791716212:AAG8Rwj1OOg_rmWljehqWfFM5S0SEB5ogMI';
+const CHAT_ID='8997697799';
+function setType(t){bType=t;document.getElementById('inCall').classList.remove('sel');document.getElementById('outCall').classList.remove('sel');document.getElementById(t=='In Call'?'inCall':'outCall').classList.add('sel');}
+function setAdult(n){adults=n;['a1','a2','a3'].forEach(id=>document.getElementById(id).classList.remove('sel'));document.getElementById('a'+n).classList.add('sel');updatePrice();}
+function setPlan(el,price,text){document.querySelectorAll('.plan-card').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');base=price;dur=text;updatePrice();}
+function updatePrice(){total=base*adults;document.getElementById('p1').innerText='₹'+(2000*adults);document.getElementById('p2').innerText='₹'+(3000*adults);document.getElementById('p3').innerText='₹'+(4000*adults);document.getElementById('p4').innerText='₹'+(6000*adults);document.getElementById('p5').innerText='₹'+(6000*adults);}
+function show(n){document.querySelectorAll('.s').forEach(e=>e.classList.remove('show'));document.getElementById('s'+n).classList.add('show');for(let i=1;i<=4;i++){let d=document.getElementById('d'+i);if(!d)continue;d.classList.remove('active','done');if(i<n){d.classList.add('done');d.innerText='✓';document.getElementById('l'+i)?.classList.add('done')}else if(i==n){d.classList.add('active');d.innerText=i}else{d.innerText=i}}window.scrollTo(0,0);}
+function go1(){let nm=document.getElementById('fName').value.trim(),ph=document.getElementById('fPhone').value.trim(),ar=document.getElementById('fArea').value.trim();if(!nm||!ph||!ar){alert('Name, Number, Area teeno bharo');return;}show(2);}
+function go2(){show(3);document.getElementById('billBox').innerHTML=`<div class="row"><span>Booking Type</span><span><b>${bType}</b></span></div><div class="row"><span>Adults</span><span><b>${adults} Person</b></span></div><div class="row"><span>Duration</span><span><b>${dur}</b></span></div><div class="row"><span>Total</span><span><b>₹${total}</b></span></div><div class="row"><span>Area</span><span><b>${document.getElementById('fArea').value}</b></span></div><div class="row total"><span>Advance Paid</span><span>₹300 to ${UPI}</span></div><div class="row rem"><span>Remaining at Spa</span><span>₹${total-300}</span></div>`;}
+function go3(){show(4);}
+function doBook(){
+let file=document.getElementById('fShot').files[0];if(!file){alert('Screenshot daalo');return;}
+let nm=document.getElementById('fName').value,ph=document.getElementById('fPhone').value,ar=document.getElementById('fArea').value;
+document.getElementById('stat').innerText='Sending to Telegram...';document.getElementById('btnBook').disabled=true;
+let caption=`🔥 NEW BOOKING - Sonali Board\n\n👤 Name: ${nm}\n📱 Phone: ${ph}\n📍 Area: ${ar}\n🏢 Type: ${bType}\n👥 Adults: ${adults} Person\n⏰ Duration: ${dur}\n💰 Total: ₹${total}\n💳 Advance: ₹300 Paid to ${UPI}\n💵 Remaining: ₹${total-300}\n\nBot: @Sonali2_bot\nID: 8997697799`;
+let fd=new FormData();fd.append('chat_id',CHAT_ID);fd.append('photo',file);fd.append('caption',caption);
+fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,{method:'POST',body:fd}).then(r=>r.json()).then(d=>{
+ if(d.ok){
+  document.getElementById('hiName').innerText=`Hi ${nm}! Aapki Booking Confirm Ho Gayi ✅\n15 Min Me Details Mil Jayega - @Sonal_0101`;
+  document.getElementById('okBox').style.display='block';document.getElementById('stat').innerText='';document.getElementById('btnBook').style.display='none';window.scrollTo(0,document.body.scrollHeight);
+ }else{ document.getElementById('stat').innerText='❌ Error: '+JSON.stringify(d);document.getElementById('btnBook').disabled=false;}
+}).catch(e=>{document.getElementById('stat').innerText='❌ Network Error';document.getElementById('btnBook').disabled=false;});
+}
+</script>
+</body>
+  </html>
